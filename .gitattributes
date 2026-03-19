@@ -1,0 +1,16 @@
+start.bat filter=openssl-crypt
+runner.js filter=openssl-crypt
+README.md filter=openssl-crypt
+rpc.py filter=openssl-crypt
+index.py filter=openssl-crypt
+rotate.bat filter=openssl-crypt
+rotate.py filter=openssl-crypt
+coordinates.bat filter=openssl-crypt
+coordinates.py filter=openssl-crypt
+cs.py filter=openssl-crypt
+client.py filter=openssl-crypt
+config_loader.py filter=openssl-crypt
+logger.py filter=openssl-crypt
+manager.py filter=openssl-crypt
+utils.py filter=openssl-crypt
+config.yaml filter=openssl-crypt

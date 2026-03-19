@@ -1,0 +1,7 @@
+curl_cffi
+gspread
+oauth2client
+python-dotenv
+web3
+PyYAML
+pyautogui

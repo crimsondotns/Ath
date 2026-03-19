@@ -1,0 +1,38 @@
+name: High & Low Update
+
+on:
+  schedule:
+    # รันทุกวัน เวลา 00:00 UTC (07:00 เวลาไทย)
+    # รูปแบบ: นาที ชั่วโมง วันที่ เดือน วันในสัปดาห์
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  runjobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Setup Decryption Filter
+        run: |
+          git config filter.openssl-crypt.smudge "openssl enc -d -aes-256-cbc -pass pass:${{ secrets.GIT_CRYPT_PASS }}"
+          git config filter.openssl-crypt.clean "openssl enc -aes-256-cbc -salt -pass pass:${{ secrets.GIT_CRYPT_PASS }}"
+          git checkout-index --force --all
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create Service
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Run Python
+        run: python index.py
