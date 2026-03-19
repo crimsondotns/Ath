@@ -14,3 +14,4 @@ logger.py filter=openssl-crypt
 manager.py filter=openssl-crypt
 utils.py filter=openssl-crypt
 config.yaml filter=openssl-crypt
+mrc.py filter=openssl-crypt
