@@ -24,8 +24,8 @@ jobs:
           
       - name: Setup Decryption Filter
         run: |
-          git config filter.openssl-crypt.smudge "openssl enc -d -aes-256-cbc -pass pass:${{ secrets.GIT_CRYPT_PASS }}"
-          git config filter.openssl-crypt.clean "openssl enc -aes-256-cbc -salt -pass pass:${{ secrets.GIT_CRYPT_PASS }}"
+          git config filter.openssl-crypt.smudge "openssl enc -d -aes-256-cbc -pbkdf2 -iter 100000 -pass pass:${{ secrets.GIT_CRYPT_PASS }}"
+          git config filter.openssl-crypt.clean "openssl enc -aes-256-cbc -salt -pbkdf2 -iter 100000 -pass pass:${{ secrets.GIT_CRYPT_PASS }}"
           git checkout-index --force --all
 
       - name: Install dependencies
